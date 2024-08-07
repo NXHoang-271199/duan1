@@ -35,20 +35,6 @@ function commentAdd() {
     }
 }
 
-function commentShowOne($id)
-{
-    $comment = showOneForComment($id);
-
-    if (empty($comment)) {
-        e404();
-    }
-    $title = 'Chi tiết comment của ' . $comment['u_name'];
-    $view = 'comments/show';
-    require_once PATH_VIEW_ADMIN . 'layouts/master.php';
-}
-
-
-
 function commentDelete($id)
 {
     deleteAcc('comments', $id);

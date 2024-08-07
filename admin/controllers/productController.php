@@ -241,10 +241,6 @@ function validateProductUpdate($id, $data)
         $errors[] = 'Trường price là bắt buộc';
     }
 
-    // if (empty($_FILES['image']['name'])) {
-    //     $errors[] = 'Trường Image là bắt buộc';
-    // }
-
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         header('location: ' . BASE_URL_ADMIN . '?act=product-update&id=' . $id);

@@ -23,51 +23,66 @@ function execPostRequest($url, $data)
     //close connection
     curl_close($ch);
     return $result;
+};
+
+function orderListAll($userId) {
+    try {
+        $sql = "
+        SELECT 
+            o.id as o_id,
+            o.created_at as o_created_at,
+            o.total_bill as o_total_bill,
+            o.status_delivery as o_status_delivery,
+            o.status_payment as o_status_payment,
+            o.user_name as o_user_name,
+            o.user_email as o_user_email,
+            o.user_phone as o_user_phone,
+            o.user_address as o_user_address
+        FROM orders o
+        WHERE o.user_id = :user_id
+        ORDER BY o.created_at DESC
+        ";
+        $stmt = $GLOBALS['connect']->prepare($sql);
+
+        $stmt->bindParam(':user_id', $userId);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    } catch (\Exception $e) {
+        debug($e);
+        // return [];
+    }
 }
 
-// function generateMomoPaymentUrl($orderId, $amount) {
-//     // Nội dung của hàm này là đoạn mã bạn đã cung cấp trước đó để gọi API MoMo và lấy URL thanh toán.
-//     // Đoạn mã này nên trả về URL thanh toán.
-//     // Hãy chắc chắn rằng bạn đã đặt đúng $redirectUrl và $ipnUrl.
+function getOrderStatus($status) {
+    switch ($status) {
+        case STATUS_DELIVERY_WFC:
+            return '<span class="badge bg-secondary text-light fs-5">Waiting for Confirmation</span>';
+        case STATUS_DELIVERY_WFP:
+            return '<span class="badge bg-primary text-light fs-5">Waiting for Pickup</span>';
+        case STATUS_DELIVERY_WFD:
+            return '<span class="badge bg-warning text-light fs-5">Waiting for Delivery</span>';
+        case STATUS_DELIVERY_ED:
+            return '<span class="badge bg-success text-light fs-5">Delivered</span>';
+        case STATUS_DELIVERY_CED:
+            return '<span class="badge bg-light text-dark fs-5">Canceled</span>';
+        default:
+            return 'Unknown';
+    }
+};
 
-//     $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-//     $partnerCode = 'MOMOBKUN20180529';
-//     $accessKey = 'klm05TvNBzhg7h7j';
-//     $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-//     $orderInfo = "Thanh toán qua MoMo cho đơn hàng " . $orderId;
-//     $redirectUrl = BASE_URL . '?act=order_success';
-//     $ipnUrl = BASE_URL . '?act=order_ipn';
-
-//     $requestId = time() . "";
-//     $requestType = "payWithATM";
-//     $extraData = "";
-
-//     $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-//     $signature = hash_hmac("sha256", $rawHash, $secretKey);
-
-//     $data = array(
-//         'partnerCode' => $partnerCode,
-//         'partnerName' => "Test",
-//         "storeId" => "MomoTestStore",
-//         'requestId' => $requestId,
-//         'amount' => $amount,
-//         'orderId' => $orderId,
-//         'orderInfo' => $orderInfo,
-//         'redirectUrl' => $redirectUrl,
-//         'ipnUrl' => $ipnUrl,
-//         'lang' => 'vi',
-//         'extraData' => $extraData,
-//         'requestType' => $requestType,
-//         'signature' => $signature
-//     );
-
-//     $result = execPostRequest($endpoint, json_encode($data));
-//     $jsonResult = json_decode($result, true);
-
-//     // Kiểm tra phản hồi từ API MoMo
-//     if (isset($jsonResult['payUrl'])) {
-//         return $jsonResult['payUrl'];
-//     } else {
-//         throw new Exception("Error: Unable to get payment URL. " . json_encode($jsonResult));
-//     }
-// }
+function cancelOrder($orderId) {
+    try {
+        $sql = "UPDATE orders SET status_delivery = :status_delivery WHERE id = :order_id AND status_delivery = :status_wfc";
+        $stmt = $GLOBALS['connect']->prepare($sql);
+        $statusDelivery = STATUS_DELIVERY_CED;
+        $statusWFC = STATUS_DELIVERY_WFC;
+        $stmt->bindParam(':status_delivery', $statusDelivery);
+        $stmt->bindParam(':order_id', $orderId);
+        $stmt->bindParam(':status_wfc', $statusWFC);
+        $stmt->execute();
+    } catch (Exception $e) {
+            debug($e);
+    }
+}

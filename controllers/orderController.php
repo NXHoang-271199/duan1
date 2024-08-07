@@ -6,6 +6,23 @@ function orderCheckout()
     require_once PATH_VIEW . 'order.php';
 }
 
+function orderHistory()
+{
+    $view = 'order-history';
+
+    $userId = $_SESSION['user']['id'];
+    $orders = orderListAll($userId);
+
+    require_once PATH_VIEW . 'layouts/master.php';
+}
+
+function orderCancel()
+{
+    $orderId = $_GET['order_id'];
+    // Gọi hàm để hủy đơn hàng từ model
+    cancelOrder($orderId);
+    header('Location: ' . BASE_URL . '?act=order_history');
+}
 // function orderPurchase()
 // {
 //     if (!empty($_POST) && !empty($_SESSION['cart'])) {
@@ -92,7 +109,8 @@ function orderCheckout()
 //     header('Location: ' . BASE_URL);
 // }
 
-function orderPurchase() {
+function orderPurchase()
+{
     if (!empty($_POST) && !empty($_SESSION['cart'])) {
         try {
             // Xử lý lưu vào bảng orders và order_items
@@ -100,12 +118,12 @@ function orderPurchase() {
             $data['user_id'] = $_SESSION['user']['id'];
             $data['total_bill'] = calculator_total_order(false);
             $data['status_delivery'] = STATUS_DELIVERY_WFC;
-            
+
             // Kiểm tra phương thức thanh toán
             if ($_POST['payment_method'] === 'cash') {
                 $data['status_payment'] = STATUS_PAYMENT_UNPAID;
             } else {
-                $data['status_payment'] = STATUS_PAYMENT_UNPAID;
+                $data['status_payment'] = STATUS_PAYMENT_PAID;
             }
 
             $orderID = insert_get_last_id('orders', $data);
@@ -127,12 +145,7 @@ function orderPurchase() {
                 }
             }
 
-            // Xử lý hậu
-            deleteCartItemByCartID($_SESSION['cartID']);
-            deleteAcc('carts', $_SESSION['cartID']);
 
-            unset($_SESSION['cart']);
-            unset($_SESSION['cartID']);
 
             // Chuyển hướng sang trang thanh toán MoMo nếu phương thức thanh toán là MoMo
             if ($_POST['payment_method'] === 'momo') {
@@ -140,6 +153,14 @@ function orderPurchase() {
                 header('Location: ' . $momoPaymentUrl);
                 exit();
             }
+
+
+            // Xử lý hậu
+            deleteCartItemByCartID($_SESSION['cartID']);
+            deleteAcc('carts', $_SESSION['cartID']);
+
+            unset($_SESSION['cart']);
+            unset($_SESSION['cartID']);
         } catch (\Exception $e) {
             debug($e);
         }
@@ -151,9 +172,10 @@ function orderPurchase() {
 }
 
 
-function generateMomoPaymentUrl($orderID, $totalBill) {
+function generateMomoPaymentUrl($orderID, $totalBill)
+{
     $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-    
+
     $partnerCode = 'MOMOBKUN20180529';
     $accessKey = 'klm05TvNBzhg7h7j';
     $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';

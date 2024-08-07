@@ -74,6 +74,9 @@ match ($act) {
     'carts' => cartListAll(),
     'cart-delete' => cartDelete($_GET['cart_id'], $_GET['product_id'], $_GET['size_id']),
 
+    'orders' => orderListAll(),
+    // 'order-detail' => orderShowOne($_GET['id']),
+    'order-update' => orderUpdate($_GET['id']),
 };
 
 require_once '../commons/disconnect.php';

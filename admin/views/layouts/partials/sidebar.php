@@ -46,7 +46,7 @@
     <!-- CATEGORY BAR -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-            <i class="fab fa-apple"></i>
+            <i class="fas fa-tasks"></i>
             <span>Category management</span>
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
@@ -57,10 +57,10 @@
             </div>
         </div>
 
-    <!-- SIZE BAR -->
+        <!-- SIZE BAR -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
-            <i class="fab fa-apple"></i>
+            <i class="fas fa-sitemap"></i>
             <span>Size management</span>
         </a>
         <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionSidebar">
@@ -75,7 +75,7 @@
     <!-- PRODUCT BAR -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
-            <i class="fab fa-apple"></i>
+            <i class="fas fa-boxes"></i>
             <span>Product management</span>
         </a>
         <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordionSidebar">
@@ -90,7 +90,7 @@
     <!-- COMMENT BAR -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
-            <i class="fab fa-apple"></i>
+            <i class="fas fa-comments"></i>
             <span>Comment management</span>
         </a>
         <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordionSidebar">
@@ -102,10 +102,10 @@
         </div>
     </li>
 
-    <!-- COMMENT BAR -->
+    <!-- CART BAR -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
-            <i class="fab fa-apple"></i>
+            <i class="fas fa-shopping-cart"></i>
             <span>Cart management</span>
         </a>
         <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordionSidebar">
@@ -113,6 +113,21 @@
                 <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                 <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=carts">Cart-items List</a>
                 <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=cart-create">New Adding</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- ORDER BAR -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+            <i class="fas fa-receipt"></i>
+            <span>Order management</span>
+        </a>
+        <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+                <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=orders">Cart-items List</a>
+                <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=order-create">New Adding</a>
             </div>
         </div>
     </li>

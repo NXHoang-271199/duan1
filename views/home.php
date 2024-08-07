@@ -3700,7 +3700,7 @@
             <div class="row mb--n30">
                 <div class=" banner4__items--col col-lg-3 mb-30">
                     <div class="banner__items banner4__items position__relative">
-                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/banner12.png" alt="banner-img">
+                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/4ps3.jpg" alt="banner-img">
                             <div class="banner4__items--content content__style1 text-center">
                                 <h2 class="banner4__items--content__title text-white">56% off in all <br>
                                     products</h2>
@@ -3715,7 +3715,7 @@
                 </div>
                 <div class="banner4__items--col col-lg-6 mb-30">
                     <div class="banner__items banner4__items position__relative mb-20">
-                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img banner__img--max__height display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/banner13.png" alt="banner-img">
+                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img banner__img--max__height display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/4ps1.jpg" alt="banner-img">
                             <div class="banner4__items--content content__style2">
                                 <h2 class="banner4__items--content__title style2 text-white">Organic Food <br>
                                     products</h2>
@@ -3728,7 +3728,7 @@
                         </a>
                     </div>
                     <div class="banner__items banner4__items position__relative">
-                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img banner__img--max__height display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/banner14.png" alt="banner-img">
+                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img banner__img--max__height display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/4ps2.png" alt="banner-img">
                             <div class="banner4__items--content content__style2">
                                 <h2 class="banner4__items--content__title style2 text-white">Natural Fresh <br>
                                     Vegetable</h2>
@@ -3743,7 +3743,7 @@
                 </div>
                 <div class="banner4__items--col col-lg-3 mb-30">
                     <div class="banner__items banner4__items position__relative">
-                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/banner15.png" alt="banner-img">
+                        <a class="banner__items--thumbnail display-block" href="shop.html"><img class="banner__items--thumbnail__img display-block" src="<?= BASE_URL ?>assets/client/assets/img/banner/4ps4.jpg" alt="banner-img">
                             <div class="banner4__items--content content__style1 text-center">
                                 <h2 class="banner4__items--content__title text-white">Natural Fresh <br>
                                     Fruit</h2>

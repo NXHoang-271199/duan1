@@ -21,8 +21,8 @@ $arrRouterNeedAuth = [
     'cart_dec',
     'cart_del',
     'order_checkout',
-    'order_purchase',
     'order_success',
+    'order_history',
     'comment_add',
 ];
 
@@ -50,8 +50,9 @@ match ($act) {
     'order_checkout' => orderCheckout(),
     'order_purchase' => orderPurchase(),
     // 'order_payment' => orderPayment(),
-    'momo_payment'=> momoPayment(),
+    'order_history' => orderHistory(),
     'order_success' => orderSuccess(),
+    'order_cancel' => orderCancel(),    
 
     'user-register' => userRegister(),
     'login' => authenShowFormLogin(),
