@@ -4,9 +4,6 @@ function homeIndex()
 {
     $view = 'home';
     $products = listAllHomeProduct();
-    // foreach ($products as &$product) {
-    //     $product['sizes'] = getSizeForProduct($product['p_id']);
-    // }
     require_once PATH_VIEW . 'layouts/master.php';
 }
 

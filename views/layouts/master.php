@@ -46,7 +46,7 @@
     <!-- End footer section -->
 
     <!-- Quickview Wrapper -->
-    <?php require_once PATH_VIEW . 'components/quickWrapper.php' ?>
+     
     <!-- Quickview Wrapper End -->
 
     <!-- Start News letter popup -->

@@ -20,7 +20,7 @@
                                 </a>
                             </li>
                             <li class="header__account--items">
-                                <a class="header__account--btn minicart__open--btn" href="javascript:void(0)" data-offcanvas>
+                                <a class="header__account--btn minicart__open--btn" href="<?= BASE_URL ?>?act=cart_list" data-offcanvas>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16.706" height="15.534" viewBox="0 0 14.706 13.534">
                                         <g id="cart" transform="translate(0 0)">
                                           <g id="cart_icon">

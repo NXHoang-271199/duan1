@@ -77,6 +77,9 @@ match ($act) {
     'orders' => orderListAll(),
     // 'order-detail' => orderShowOne($_GET['id']),
     'order-update' => orderUpdate($_GET['id']),
+
+
+    'statistics' => orderStatistics(),
 };
 
 require_once '../commons/disconnect.php';

@@ -25,6 +25,33 @@ function execPostRequest($url, $data)
     return $result;
 };
 
+function getOrderItems($orderId) {
+    try {
+        $sql = "
+            SELECT 
+                oi.product_id as oi_product_id,
+                oi.size_id as oi_size_id,
+                oi.quantity as oi_quantity,
+                oi.price as oi_price,
+                p.name as p_name,
+                p.image as p_image,
+                s.name as s_name
+            FROM order_items oi
+            JOIN products p ON oi.product_id = p.id
+            JOIN sizes s ON oi.size_id = s.id
+            WHERE oi.order_id = :order_id
+        ";
+        $stmt = $GLOBALS['connect']->prepare($sql);
+        $stmt->bindParam(':order_id', $orderId);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (\Exception $e) {
+        debug($e);
+        return [];
+    }
+}
+
+
 function orderListAll($userId) {
     try {
         $sql = "
@@ -32,6 +59,7 @@ function orderListAll($userId) {
             o.id as o_id,
             o.created_at as o_created_at,
             o.total_bill as o_total_bill,
+            o.payment_method as o_payment_method,
             o.status_delivery as o_status_delivery,
             o.status_payment as o_status_payment,
             o.user_name as o_user_name,

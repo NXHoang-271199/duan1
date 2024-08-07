@@ -26,11 +26,11 @@
 
     // Các trạng thái đơn hàng
     $statuses = [
-        STATUS_DELIVERY_WFC => 'Chờ xác nhận',
-        STATUS_DELIVERY_WFP => 'Chờ lấy hàng',
-        STATUS_DELIVERY_WFD => 'Chờ giao hàng',
-        STATUS_DELIVERY_ED => 'Đã giao',
-        STATUS_DELIVERY_CED => 'Đã hủy'
+        STATUS_DELIVERY_WFC => 'Waiting for Confirmation',
+        STATUS_DELIVERY_WFP => 'Waiting for Pickup',
+        STATUS_DELIVERY_WFD => 'Waiting for Delivery',
+        STATUS_DELIVERY_ED => 'Delivered',
+        STATUS_DELIVERY_CED => 'Canceled'
     ];
 
     if (!empty($_POST)) {
@@ -64,8 +64,6 @@
             ];
         }
 
-        // Validate dữ liệu (Có thể bật lại phần này nếu bạn có hàm validate)
-        // validateOrderUpdate($orderId, $data);
 
         try {
             $GLOBALS['connect']->beginTransaction(); // Bắt đầu giao dịch

@@ -132,6 +132,21 @@
         </div>
     </li>
 
+    <!-- STATISTIC BAR -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+            <i class="fas fa-calculator"></i>
+            <span>Statistic management</span>
+        </a>
+        <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+                <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=statistics">Statistics List</a>
+                <!-- <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=statistic-create">New Adding</a> -->
+            </div>
+        </div>
+    </li>
+
 
 
 

@@ -34,7 +34,6 @@ handlePostRequest();
 // Xử lý yêu cầu GET với match
 match ($act) {
     '/' => homeIndex(),
-    'quickview' => quickView($_GET['id']),
     'product' => productDetail($_GET['id']),
     'category' => productListByCategoryID($_GET['id'], $_GET['page'] ?? 1, $_GET['perPage'] ?? 2),
 

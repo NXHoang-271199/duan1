@@ -23,91 +23,6 @@ function orderCancel()
     cancelOrder($orderId);
     header('Location: ' . BASE_URL . '?act=order_history');
 }
-// function orderPurchase()
-// {
-//     if (!empty($_POST) && !empty($_SESSION['cart'])) {
-//         try {
-//             // Xử lý lưu vào bảng orders và order_items
-//             $data = $_POST;
-//             $data['user_id'] = $_SESSION['user']['id'];
-//             $data['total_bill'] = calculator_total_order(false);
-//             $data['status_delivery'] = STATUS_DELIVERY_WFC;
-//             $data['status_payment'] = STATUS_PAYMENT_UNPAID;
-
-//             $orderID = insert_get_last_id('orders', $data);
-
-//             foreach ($_SESSION['cart'] as $productID => $item) {
-//                 $orderItem = [
-//                     'order_id'      => $orderID,
-//                     'product_id'    => $productID,
-//                     'quantity'      => $item['quantity'],
-//                     'price'         => $item['discount'] ?: $item['price'],
-//                 ];
-
-//                 insert('order_items', $orderItem);
-//             }
-//             //Xử lý hậu
-//             deleteCartItemByCartID($_SESSION['cartID']);
-//             deleteAcc('carts', $_SESSION['cartID']);
-
-//             unset($_SESSION['cart']);
-//             unset($_SESSION['cartID']);
-
-//         } catch (\Exception $e) {
-//             debug($e);
-//         }
-//         header('Location: ' . BASE_URL . '?act=order_success');
-//         exit();
-//     }
-
-//     header('Location: ' . BASE_URL);
-// }
-
-// function orderPurchase() {
-//     if (!empty($_POST) && !empty($_SESSION['cart'])) {
-//         try {
-//             // Xử lý lưu vào bảng orders và order_items
-//             $data = $_POST;
-//             $data['user_id'] = $_SESSION['user']['id'];
-//             $data['total_bill'] = calculator_total_order(false);
-//             $data['status_delivery'] = STATUS_DELIVERY_WFC;
-//             $data['status_payment'] = STATUS_PAYMENT_UNPAID;
-
-//             $orderID = insert_get_last_id('orders', $data);
-
-//             foreach ($_SESSION['cart'] as $productID => $items) {
-//                 foreach ($items as $sizeID => $item) {
-//                     $quantity = isset($item['quantity']) ? $item['quantity'] : 0;
-//                     $price = isset($item['discount']) ? $item['discount'] : (isset($item['price']) ? $item['price'] : 0);
-
-//                     $orderItem = [
-//                         'order_id'      => $orderID,
-//                         'product_id'    => $productID,
-//                         'size_id'       => $sizeID,
-//                         'quantity'      => $quantity,
-//                         'price'         => $price,
-//                     ];
-
-//                     insert('order_items', $orderItem);
-//                 }
-//             }
-
-//             // Xử lý hậu
-//             deleteCartItemByCartID($_SESSION['cartID']);
-//             deleteAcc('carts', $_SESSION['cartID']);
-
-//             unset($_SESSION['cart']);
-//             unset($_SESSION['cartID']);
-
-//         } catch (\Exception $e) {
-//             debug($e);
-//         }
-//         header('Location: ' . BASE_URL . '?act=order_success');
-//         exit();
-//     }
-
-//     header('Location: ' . BASE_URL);
-// }
 
 function orderPurchase()
 {
@@ -145,15 +60,8 @@ function orderPurchase()
                 }
             }
 
-
-
-            // Chuyển hướng sang trang thanh toán MoMo nếu phương thức thanh toán là MoMo
-            if ($_POST['payment_method'] === 'momo') {
-                $momoPaymentUrl = generateMomoPaymentUrl($orderID, $data['total_bill']);
-                header('Location: ' . $momoPaymentUrl);
-                exit();
-            }
-
+            // Cập nhật $_SESSION['recent_order']
+            $_SESSION['recent_order'] = $orderID;
 
             // Xử lý hậu
             deleteCartItemByCartID($_SESSION['cartID']);
@@ -161,6 +69,20 @@ function orderPurchase()
 
             unset($_SESSION['cart']);
             unset($_SESSION['cartID']);
+
+            // Chuyển hướng sang trang thanh toán MoMo nếu phương thức thanh toán là MoMo
+            if ($_POST['payment_method'] == 'momo') {
+                $momoPaymentUrl = generateMomoPaymentUrl($orderID, $data['total_bill']);
+                header('Location: ' . $momoPaymentUrl);
+                exit();
+                // test momo:
+                // 9704 0000 0000 0018
+                // NGUYEN VAN A
+                // 03/07
+                // OTP
+            }
+
+            $_SESSION['recent_order'] = $orderID;
         } catch (\Exception $e) {
             debug($e);
         }
@@ -228,5 +150,25 @@ function momoPayment()
 
 function orderSuccess()
 {
-    require_once PATH_VIEW . 'order-success.php';
+    // Lấy order ID từ session
+    $orderId = $_SESSION['recent_order'] ?? null;
+
+    if ($orderId) {
+        // Lấy thông tin đơn hàng từ database
+        $order = showOne('orders', $orderId);
+        $orderItems = getOrderItems($orderId);
+
+        // Lấy thông tin người dùng
+        // $user = [
+        //     'name' => $order['user_name'],
+        //     'email' => $order['user_email'],
+        //     'phone' => $order['user_phone'],
+        //     'address' => $order['user_address']
+        // ];
+
+        // Xóa thông tin order khỏi session
+        unset($_SESSION['recent_order']);
+    }
+    $view = "order-success";
+    require_once PATH_VIEW . 'layouts/master.php';
 }

@@ -194,9 +194,9 @@
                                                         </div>
                                                     </td>
                                                     <td class="cart__table--body__list">
-                                                        <span class="cart__price">$<?php
+                                                        <span class="cart__price"><?php
                                                                                     $total = ($item['discount'] ?: $item['price']) * $item['quantity'];
-                                                                                    echo number_format($total);
+                                                                                    echo number_format($total) . ' VNĐ';
                                                                                     ?></span>
                                                     </td>
                                                 </tr>
@@ -224,7 +224,9 @@
 
                                     <tr class="checkout__total--items">
                                         <td class="checkout__total--title text-left">Subtotal </td>
-                                        <td class="checkout__total--amount text-right">$860.00</td>
+                                        <td class="checkout__total--amount text-right"><?=
+                                                                                    calculator_total_order()
+                                                                                    ?></td>
                                     </tr>
                                     <tr class="checkout__total--items">
                                         <td class="checkout__total--title text-left">Shipping</td>

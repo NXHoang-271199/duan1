@@ -109,7 +109,7 @@ if (!function_exists('calculator_total_order')) {
                     $total += $price * $quantity;
                 }
             }
-            return $flag ? number_format($total) : $total;
+            return $flag ? number_format($total,2) . ' VNĐ' : $total;
         }
         return 0;
     }
