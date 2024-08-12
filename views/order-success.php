@@ -188,7 +188,7 @@
                                             <div class="customer__information--step">
                                                 <h4 class="customer__information--subtitle h5">Payment method</h4>
                                                 <ul>
-                                                    <li><span class="customer__information--text"><?= htmlspecialchars($order['payment_method']); ?></span></li>
+                                                    <li><span class="customer__information--text"><?= getPaymentMethodBadge($order['payment_method']); ?></span></li>
                                                 </ul>
                                             </div>
                                             <div class="customer__information--step">
@@ -203,7 +203,7 @@
                             </div>
                             <div class="checkout__content--step__footer d-flex align-items-center">
                                 <a class="continue__shipping--btn btn border-radius-5" href="<?= BASE_URL ?>?act=order_history">Order list</a>
-                                <a class="previous__link--content" href="cart.html">Return to shipping</a>
+                                <a class="previous__link--content" href="<?= BASE_URL ?>">Return to home</a>
                             </div>
                         </form>
                     </main>
@@ -227,7 +227,10 @@
                                         </div>
                                     </td>
                                     <td class="cart__table--body__list">
-                                        <span class="cart__price"><?= number_format($orderItem['oi_price']) . ' VNĐ'?></span>
+                                        <span class="cart__price"><?php 
+                                        $total = $orderItem['oi_price'] * $orderItem['oi_quantity'];
+                                        echo number_format($total) ;
+                                        ?></span>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

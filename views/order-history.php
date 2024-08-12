@@ -6,10 +6,10 @@
             <div class="row row-cols-1">
                 <div class="col">
                     <div class="breadcrumb__content text-center">
-                        <h1 class="breadcrumb__content--title text-white mb-25">Account</h1>
+                        <h1 class="breadcrumb__content--title text-white mb-25">Order History</h1>
                         <ul class="breadcrumb__content--menu d-flex justify-content-center">
-                            <li class="breadcrumb__content--menu__items"><a class="text-white" href="index.html">Home</a></li>
-                            <li class="breadcrumb__content--menu__items"><span class="text-white">Account</span></li>
+                            <li class="breadcrumb__content--menu__items"><a class="text-white" href="<?= BASE_URL ?>">Home</a></li>
+                            <li class="breadcrumb__content--menu__items"><span class="text-white">History</span></li>
                         </ul>
                     </div>
                 </div>
@@ -33,6 +33,7 @@
                                             <tr class="account__table--header__child">
                                                 <th class="account__table--header__child--items">Order</th>
                                                 <th class="account__table--header__child--items">Date</th>
+                                                <th class="account__table--header__child--items">Payment Method</th>
                                                 <th class="account__table--header__child--items">Payment Status</th>
                                                 <th class="account__table--header__child--items">Delivery Status</th>
                                                 <th class="account__table--header__child--items">Total</th>
@@ -44,7 +45,7 @@
                                                 <tr class="account__table--body__child">
                                                     <td class="account__table--body__child--items"><?php echo '#' . htmlspecialchars($order['o_id']); ?></td>
                                                     <td class="account__table--body__child--items"><?php echo date('F d, Y', strtotime($order['o_created_at'])); ?></td>
-                                                    <td class="account__table--body__child--items">
+                                                    <td class="account__table--body__child--items"><?= getPaymentMethodBadge($order['o_payment_method']); ?></td>                                                    <td class="account__table--body__child--items">
                                                         <?= $order['o_status_payment'] == STATUS_PAYMENT_PAID ? '<span class="badge bg-success fs-5">Paid</span>' : '<span class="badge bg-danger fs-5">Unpaid</span>' ?>
                                                     </td>
                                                     <td class="account__table--body__child--items">

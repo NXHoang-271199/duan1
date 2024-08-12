@@ -57,3 +57,14 @@ function getOrderStatus($status) {
             return 'Unknown';
     }
 };
+
+// function getPaymentMethodBadge($paymentMethod) {
+//     switch ($paymentMethod) {
+//         case 'cash':
+//             return '<span class="badge badge-primary ">Cash</span>';
+//         case 'momo':
+//             return '<span class="badge badge-danger">MoMo</span>';
+//         default:
+//             return '<span class="badge bg-light text-dark">Unknown</span>';
+//     }
+// }

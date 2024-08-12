@@ -26,6 +26,7 @@
                             <th>USERNAME</th>
                             <th>DATE_CREATED</th>
                             <th>TOTAL</th>
+                            <th>PAYMENT_METHOD</th>
                             <th>PAYMENT_STATUS</th>
                             <th>DELIVERY_STATUS</th>
                             <th>ACTION</th>
@@ -37,6 +38,7 @@
                             <th>USERNAME</th>
                             <th>DATE_CREATED</th>
                             <th>TOTAL</th>
+                            <th>PAYMENT_METHOD</th>
                             <th>PAYMENT_STATUS</th>
                             <th>DELIVERY_STATUS</th>
                             <th>ACTION</th>
@@ -51,6 +53,7 @@
                                 <td><?= $order['user_name'] ?></td>
                                 <td><?= $order['created_at'] ?></td>
                                 <td><?= $order['total_bill'] ?></td>
+                                <td><?= getPaymentMethodBadge($order['payment_method']); ?></td>
                                 <td><?= $order['status_payment'] == STATUS_PAYMENT_PAID ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger fs-5">Unpaid</span>' ?></td>
                                 <td><?= getOrderStatus($order['status_delivery']);  ?></td>
                                 <td>

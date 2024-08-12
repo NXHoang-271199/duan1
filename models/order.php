@@ -83,6 +83,18 @@ function orderListAll($userId) {
     }
 }
 
+function getPaymentMethodBadge($paymentMethod) {
+    switch ($paymentMethod) {
+        case 'cash':
+            return '<span class="badge bg-primary text-light">Cash</span>';
+        case 'momo':
+            return '<span class="badge bg-danger text-light">MoMo</span>';
+        default:
+            return '<span class="badge bg-light text-dark">Unknown</span>';
+    }
+}
+
+
 function getOrderStatus($status) {
     switch ($status) {
         case STATUS_DELIVERY_WFC:

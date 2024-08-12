@@ -48,7 +48,6 @@ match ($act) {
 
     'order_checkout' => orderCheckout(),
     'order_purchase' => orderPurchase(),
-    // 'order_payment' => orderPayment(),
     'order_history' => orderHistory(),
     'order_success' => orderSuccess(),
     'order_cancel' => orderCancel(),    
@@ -57,3 +56,5 @@ match ($act) {
     'login' => authenShowFormLogin(),
     'logout' => authenLogout(),
 };
+
+require_once '../commons/disconnect.php';
